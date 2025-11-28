@@ -1,8 +1,8 @@
 variables:
-  PROJECT_NAME: Spend
-  SKIP_TESTS: "true"
+    PROJECT_NAME: Spent
+    SKIP_TESTS: "true"
 
 include:
-  - project: oceanbox/gitlab-ci
-    ref: v3
-    file: Dotnet.gitlab-ci.yml
+    - project: oceanbox/gitlab-ci
+      ref: v3
+      file: Dotnet.gitlab-ci.yml

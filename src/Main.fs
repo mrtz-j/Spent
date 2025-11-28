@@ -8,88 +8,55 @@ open Fargo.Operators
 
 open Settings
 
-type EpicArgs = {
-        Name: string option
-    }
+type ListArgs = { Epic: string option }
 
-type SpendArgs = {
-        At: DateTime option
-        Time: string
-        Summary: string option
-    }
+type SpentArgs = { Time: string; When: DateTime option; Summary: string option }
+
+[<RequireQualifiedAccess>]
 type private Cmd =
- | EpicCmd
- | SpendCmd
+    | List
+    | Spent
 
 type Command =
-  | Epics of EpicArgs
-  | Spend of SpendArgs
+    | List of ListArgs
+    | Spent of SpentArgs
 
-let configureSerilog level =
-    let n =
-        match level with
-        | 0 -> LogEventLevel.Error
-        | 1 -> LogEventLevel.Warning
-        | 2 -> LogEventLevel.Information
-        | 3 -> LogEventLevel.Debug
-        | _ -> LogEventLevel.Verbose
-    LoggerConfiguration()
-        .MinimumLevel.Is(n)
-        .WriteTo.Console()
-        .CreateLogger()
+let configureSerilog n =
+    LoggerConfiguration().MinimumLevel.Is(n).WriteTo.Console().CreateLogger()
 
-let argParser: Arg<Command * int> =
+let argParser: Arg<Command> =
     fargo {
-        let! logLevel =
-            opt "log-level" null "level" "Log level (0=Verbose, 1=Debug, 2=Information, 3=Warning, 4=Error)"
-            |> optParse (fun s ->
-                match Int32.TryParse s with
-                | true, v when v >= 0 && v <= 4 -> Ok v
-                | true, _ -> Error "Log level must be between 0 and 4"
-                | false, _ -> Error "Invalid log level value"
-            )
-            |> defaultValue 1
-
         let! mainCommand =
-            cmd "list" null "List epics" |>> Cmd.EpicCmd
-            <|> (cmd "log" null "Log spent time" |>> Cmd.SpendCmd)
+            cmd "list" "ls" "List epics" |>> Cmd.List
+            <|> (cmd "time" "t" "Log spent time" |>> Cmd.Spent)
             <|> (error "Invalid or missing command")
 
         match mainCommand with
-        | Cmd.EpicCmd ->
+        | Cmd.List ->
             let! name = opt "name" "n" "filter" "Epic match filter"
-            return
-                Epics {
-                    Name = name
-                },
-                logLevel
+            return List { Epic = name }
 
-        | Cmd.SpendCmd ->
-            let! whence = opt "at" "a" "datetime" "When" |> optParse (fun a -> Ok (DateTime.Parse a))
-            and! summary = opt "summary" "s" "string" "Summary" |> optParse Ok
+        | Cmd.Spent ->
+            let! date =
+                opt "at" "a" "datetime" "When"
+                |> optParse (fun a -> Ok(DateTime.Parse a))
+            and! summary =
+                opt "summary" "s" "string" "Summary"
+                |> optParse Ok
             and! time = arg "time" "GitLab time string" |> reqArg
-            return
-                Spend {
-                    At = whence
-                    Time = time
-                    Summary = summary
-                },
-                logLevel
+            return Spent { Time = time; When = date; Summary = summary }
     }
 
-let executeCommand (ct: System.Threading.CancellationToken) (command: Command * int) =
+let executeCommand (_: Threading.CancellationToken) (command: Command) =
     task {
-        let logLevel = snd command
-        Log.Logger <- configureSerilog logLevel
+        Log.Logger <- configureSerilog LogEventLevel.Warning
 
-        match fst command with
-        | Epics args ->
-            return 0
-        | Spend args ->
-            return 0
+        match command with
+        | List args -> return 0
+        | Spent args -> return 0
     }
 
 [<EntryPoint>]
 let main argv =
-    run "spend" argParser argv executeCommand
+    run "spent" argParser argv executeCommand
     0

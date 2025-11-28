@@ -1,10 +1,13 @@
 module Settings
 
 open System.IO
-open Thoth.Json.Net
 open Serilog
 
-type Settings = { GitLab: string }
+type Settings =
+    { gitlabUrl: string
+      group: string
+      epicId: int
+      aliases: Map<string, int> }
 
 let tryGetEnv =
     System.Environment.GetEnvironmentVariable
@@ -12,3 +15,5 @@ let tryGetEnv =
         | null
         | "" -> None
         | x -> Some x
+
+let settings = tryGetEnv "GITLAB_URL"

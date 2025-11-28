@@ -33,6 +33,16 @@
           "FSharp.Data.Xml.Core": "6.4.0"
         }
       },
+      "FSharp.SystemTextJson": {
+        "type": "Direct",
+        "requested": "[1.4.36, )",
+        "resolved": "1.4.36",
+        "contentHash": "1xLk0SBF1nedD74B77rcArjD2d+DeZwbNI7BVCAyKwIBERo1VoX8Mf4AtX0OV2L3ZeM/XS1b6BuhXCyoh0KBnw==",
+        "dependencies": {
+          "FSharp.Core": "4.7.0",
+          "System.Text.Json": "6.0.10"
+        }
+      },
       "FSharpPlus": {
         "type": "Direct",
         "requested": "[1.6.1, )",
@@ -65,35 +75,6 @@
         "dependencies": {
           "Serilog": "4.0.0",
           "Serilog.Sinks.File": "5.0.0"
-        }
-      },
-      "Thot.Json.Net": {
-        "type": "Direct",
-        "requested": "[1.0.2, )",
-        "resolved": "1.0.2",
-        "contentHash": "+I6Amh/xQjlIfxxcNQVO5zdNR/rngk3HGJoxyQPdWS0gb9dJxGviy4fnoY4B9BjqvmZqHuWGUOCTG+UrWpmiQw==",
-        "dependencies": {
-          "FSharp.Core": "4.3.4",
-          "Newtonsoft.Json": "11.0.1"
-        }
-      },
-      "Thoth.Json.Net": {
-        "type": "Direct",
-        "requested": "[12.0.0, )",
-        "resolved": "12.0.0",
-        "contentHash": "n2YyONYdWCFS4Pu7wrqgV/l5tPuN+t3gxEfs/2RwqCiQkRnbgKs9dK61zHeZS5YganAoFbxLSwbaNL7SvSrS9g==",
-        "dependencies": {
-          "FSharp.Core": "4.7.2",
-          "Fable.Core": "3.1.6",
-          "Newtonsoft.Json": "13.0.1"
-        }
-      },
-      "Fable.Core": {
-        "type": "Transitive",
-        "resolved": "3.1.6",
-        "contentHash": "w6M1F0zoLk4kTFc1Lx6x1Ft6BD3QwRe0eaLiinAqbjVkcF+iK+NiXGJO+a6q9RAF9NCg0vI48Xku7aNeqG4JVw==",
-        "dependencies": {
-          "FSharp.Core": "4.7.1"
         }
       },
       "FSharp.Data.Csv.Core": {
@@ -164,17 +145,34 @@
           "FSharp.Data.Runtime.Utilities": "6.4.0"
         }
       },
-      "Newtonsoft.Json": {
-        "type": "Transitive",
-        "resolved": "13.0.1",
-        "contentHash": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A=="
-      },
       "Serilog.Sinks.File": {
         "type": "Transitive",
         "resolved": "5.0.0",
         "contentHash": "uwV5hdhWPwUH1szhO8PJpFiahqXmzPzJT/sOijH/kFgUx+cyoDTMM8MHD0adw9+Iem6itoibbUXHYslzXsLEAg==",
         "dependencies": {
           "Serilog": "2.10.0"
+        }
+      },
+      "System.Runtime.CompilerServices.Unsafe": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg=="
+      },
+      "System.Text.Encodings.Web": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "Vg8eB5Tawm1IFqj4TVK1czJX89rhFxJo9ELqc/Eiq0eXy13RK00eubyU6TJE6y+GQXjyV5gSfiewDUZjQgSE0w==",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        }
+      },
+      "System.Text.Json": {
+        "type": "Transitive",
+        "resolved": "6.0.10",
+        "contentHash": "NSB0kDipxn2ychp88NXWfFRFlmi1bst/xynOutbnpEfRCT9JZkZ7KOmF/I/hNKo2dILiMGnqblm+j1sggdLB9g==",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "System.Text.Encodings.Web": "6.0.0"
         }
       }
     }
