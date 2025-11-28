@@ -25,4 +25,7 @@
     <PackageReference Update="FSharp.Core" Version="9.0.300" />
     <PackageReference Include="YamlDotNet" Version="16.3.0" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="GraphQL\GitLab.Data.GraphQLClient.fsproj" />
+  </ItemGroup>
 </Project>

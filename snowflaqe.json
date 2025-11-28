@@ -2,6 +2,6 @@
   "schema": "https://gitlab.com/api/graphql",
   "queries": "./queries",
   "project": "GitLab.Data.GraphQLClient",
-  "output": "./src/Client",
+  "output": "./src/GraphQL",
   "target": "fsharp"
 }
