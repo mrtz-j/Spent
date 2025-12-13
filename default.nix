@@ -73,6 +73,7 @@ in
 
   shell = pkgs.mkShell {
     packages = with pkgs; [
+      just
       npins
       snowflaqe
       fantomas
@@ -81,5 +82,7 @@ in
     ];
 
     NPINS_DIRECTORY = "nix";
+
+    DOTNET_ROOT = "${dotnet-sdk}/share/dotnet";
   };
 }
